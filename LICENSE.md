@@ -1,7 +1,8 @@
 # Licenses
 
+License: _[zlib](https://www.zlib.net/zlib_license.html "zlib license")_
+
 Copyright (c) 2024, **thallheim**
-_[zlib](https://www.zlib.net/zlib_license.html "zlib license")_
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -20,10 +21,10 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 
 
-## Third-party
+# Third-party
 
-### [fmt](https://github.com/fmtlib/fmt "fmt library github")
-_[MIT](https://opensource.org/license/MIT "MIT license")_
+## [fmt](https://github.com/fmtlib/fmt "fmt library github")
+License: _[MIT](https://opensource.org/license/MIT "MIT license")_
 
 > Copyright (c) 2012 - present, Victor Zverovich and {fmt} contributors
 >
@@ -53,8 +54,8 @@ _[MIT](https://opensource.org/license/MIT "MIT license")_
 > source code, you may redistribute such embedded portions in such object form
 > without including the above copyright and permission notices.
 
-### [SDL3](https://github.com/libsdl-org/SDL "sdl github")
-_[zlib](https://www.zlib.net/zlib_license.html "zlib license")_
+## [SDL3](https://github.com/libsdl-org/SDL "sdl github")
+License: _[zlib](https://www.zlib.net/zlib_license.html "zlib license")_
 
 > This software is provided 'as-is', without any express or implied
 > warranty.  In no event will the authors be held liable for any damages
