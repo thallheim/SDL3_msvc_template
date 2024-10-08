@@ -9,33 +9,11 @@ endif (WIN32)
 set(CMAKE_CXX_STANDARD 17)
 project(SDL3_msvc_template)
 
-# MSVC COMPILER OPTIONS
-# `````````````````````
-# /LD	Create dynamic-link library.
-# /LDd	Create debug dynamic-link library.
-# /MDd	Compile debug multithreaded DLL, using MSVCRTD.lib.
-# /MD	Compile multithreaded DLL, using MSVCRT.lib.
-
-# /MP	Builds multiple source files concurrently.
-# /MT	Compile multithreaded executable, by using LIBCMT.lib.
-# /MTd	Compile debug multithreaded executable, by using LIBCMTD.lib.
-
-# /nologo           Suppresses display of sign-on banner.
-# /O1               Creates small code.
-# /O2               Creates fast code.
-# /Ob<n>            Controls inline expansion.
-# /options:strict	Unrecognized compiler options are errors.
-
-# /ZI     Include debug information in a program database compatible with Edit and Continue. (x86 only)
-# /Zi     Generate complete debugging information.
-# /Zl     Remove default library name from the .obj file.
-# /Zm     Specify precompiled header memory allocation limit.
-# /Zo[-]  Generate richer debugging information for optimized code.
-
 if (MSVC)
-    add_compile_options(/nologo /W3 /Zi /cgthreads8)
+    # add_compile_options(/nologo /W3 /Zi /cgthreads8)
+    add_compile_options(/nologo)
     # Force static linking of C++ runtime
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    # set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 else()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
@@ -67,7 +45,7 @@ if(NOT SDL3_FOUND)
   FetchContent_MakeAvailable(SDL)
   set_property(DIRECTORY "${CMAKE_SOURCE_DIR}/src/extern/sdl-src" PROPERTY EXCLUDE_FROM_ALL TRUE)
 endif()
-##########################################
+
 
 ##############################################################
 # SOURCE GLOBS                                               #
@@ -77,17 +55,25 @@ file(GLOB SRC
   src/*.h src/*.hpp
   src/*.c src/*.cpp
 )
-##########################################
+
 
 ##############################################################
 # TARGETS & LINKS                                            #
 ##############################################################
 if(SDL_SHARED)
   add_executable(${PROJECT_NAME}-dyn ${SRC})
+  target_compile_options(${PROJECT_NAME}-dyn
+    PRIVATE
+    "/W3" "/Zi" "/cgthreads8")
 endif()
 
 if(SDL_STATIC)
+  # Force static linking of C++ runtime
+  # set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   add_executable(${PROJECT_NAME}-static ${SRC})
+  target_compile_options(${PROJECT_NAME}-static
+    PRIVATE
+    "/W3" "/Zi" "/cgthreads8")
 endif()
 
 if(SDL_SHARED)
@@ -108,7 +94,7 @@ if(SDL_STATIC)
     SDL3::SDL3-static
   )
 endif()
-##########################################
+
 
 ##############################################################
 # TARGET INCLUDES                                            #
